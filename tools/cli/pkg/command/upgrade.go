@@ -59,6 +59,10 @@ func (cmd *UpgradeCommand) ValidateTransformUpgradeOpts() error {
 		return err
 	}
 
+	if cmd.maintenancewindow {
+		cmd.orchestrationParams.Strategy.MaintenanceWindow = true
+	}
+
 	// Validate schedule
 	if scheduleParam, ok := scheduleInputToParam[cmd.schedule]; ok {
 		// TODO Remove schedule type maintenancewindow
